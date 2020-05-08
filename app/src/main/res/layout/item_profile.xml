@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+
+    <TextView
+        android:id="@+id/profileTitle_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/instanano"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/img_placeholder"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/profileTitle_textView" />
+
+    <TextView
+        android:id="@+id/profileName_TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+    <TextView
+        android:id="@+id/profileEmail_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/profileName_TextView" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/profileInfo_textView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="8dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:layout_marginEnd="8dp"-->
+    <!--        android:text="@string/long_Text"-->
+    <!--        android:textAlignment="textStart"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline_end"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline_start"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/profileEmail_textView" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/profile_edit_button"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="35dp"-->
+    <!--        android:layout_marginStart="8dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:layout_marginEnd="8dp"-->
+    <!--        android:background="@drawable/edit_profile"-->
+    <!--        android:text="@string/edit_profile"-->
+    <!--        android:textAlignment="center"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline_end"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline_start"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/profileInfo_textView" />-->
+
+
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/profilePost_textView"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:text="@string/post"-->
+    <!--            android:textAlignment="center"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/profile_edit_button"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/guideline_start"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/guideline_start1"/>-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/profileFollower_textView"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:text="@string/follower"-->
+    <!--            android:textAlignment="center"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/profile_edit_button"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/guideline_start1"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/guideline_end1"/>-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/profileFollowing_textView"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:text="@string/following"-->
+    <!--            android:textAlignment="center"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/profile_edit_button"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/guideline_end1"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/guideline_end"/>-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/profile_countOfPost_textView"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            android:text="@string/_1000"-->
+    <!--            android:textAlignment="center"-->
+    <!--            android:textColor="#000000"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/profilePost_textView"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/guideline_start"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/guideline_start1"/>-->
+
+    <!--        <TextView-->
+    <!--        android:id="@+id/profile_countOfFlower_textView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:text="@string/_2000"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textColor="#000000"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/profileFollower_textView"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/guideline_start1"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/guideline_end1"/>-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/profile_countOfFollowing_textView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:text="@string/_3000"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textColor="#000000"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/profileFollowing_textView"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/guideline_end1"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>-->
+
+    <Button
+        android:id="@+id/profileLogOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:text="LogOut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/profileEitPhotoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="Edit Photo"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+        app:layout_constraintEnd_toEndOf="@+id/profile_image"
+        app:layout_constraintStart_toStartOf="@+id/profile_image" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
