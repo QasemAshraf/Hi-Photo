@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        for (Fragment fragment : Objects.requireNonNull(getSupportFragmentManager()
-                .getPrimaryNavigationFragment()).getChildFragmentManager().getFragments()) {
-            fragment.onActivityResult(requestCode, resultCode, data);
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        for (Fragment fragment : Objects.requireNonNull(getSupportFragmentManager()
+//                .getPrimaryNavigationFragment()).getChildFragmentManager().getFragments()) {
+//            fragment.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
 }

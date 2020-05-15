@@ -40,18 +40,18 @@ public class PostHolder extends RecyclerView.ViewHolder {
     void bindView(Post post){
 
 
-//        Picasso.get()
-//                .load(post.getUser().getImageAccount())
-//                .placeholder(R.drawable.img_placeholder)
-//                .error(R.drawable.img_placeholder)
-//                .into(imageAccount);
+        Picasso.get()
+                .load(post.getUser().getImageAccount())
+                .placeholder(R.drawable.img_placeholder)
+                .error(R.drawable.img_placeholder)
+                .into(imageAccount);
 
         Picasso.get()
                 .load(post.getImage())
                 .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.img_placeholder)
                 .into(imagePost);
-//        nameOfAccount.setText(post.getUser().getNameOfAccount());
+        nameOfAccount.setText(post.getUser().getNameOfAccount());
         tvTitle.setText(post.getTitle());
         tvDate.setText(post.getDate());
         String likes = post.getNumberOfLikes() + "Person";

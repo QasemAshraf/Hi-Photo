@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
@@ -94,6 +96,15 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/profileName_TextView" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profile_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileEmail_textView" />
     <!--    <TextView-->
     <!--        android:id="@+id/profileInfo_textView"-->
     <!--        android:layout_width="0dp"-->
@@ -205,14 +216,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/profileEitPhotoButton"
+        android:id="@+id/profileEditButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
-        android:text="Edit Photo"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-        app:layout_constraintEnd_toEndOf="@+id/profile_image"
-        app:layout_constraintStart_toStartOf="@+id/profile_image" />
+        android:text="Edit Profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 

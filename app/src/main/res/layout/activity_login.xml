@@ -50,8 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/your_email"
+        android:inputType="textEmailAddress"
         android:layout_marginTop="8dp"
-        android:padding="10dp"
+        android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/textView_yourEmail"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"/>
@@ -69,9 +70,10 @@
         android:id="@+id/login_password_EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textPassword"
         android:layout_marginTop="8dp"
         android:hint="@string/your_password"
-        android:padding="10dp"
+        android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/textView_yourPassword"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"/>

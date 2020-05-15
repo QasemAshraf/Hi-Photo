@@ -17,4 +17,12 @@ public class Utilities {
         java.text.SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return simpleDateFormat.format(date);
     }
+
+    public static void getEditPhoto(){
+
+    }
+
+    public static void checkAccessImagePermission(){
+
+    }
 }

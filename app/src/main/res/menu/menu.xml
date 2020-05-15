@@ -12,11 +12,7 @@
         android:title="Add Post" />
 
     <item
-        android:id="@+id/editProfileFragment"
-        android:icon="@drawable/ic_nav_profile"
-        android:title="Edit Profile" />
-    <item
-        android:id="@+id/HomeProfileFragment"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_nav_profile"
         android:title="Home Profile" />
 </menu>

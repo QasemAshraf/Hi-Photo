@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.android.instanano.models.Post;
 import com.android.instanano.models.User;
 import com.android.instanano.utils.OnLikedClicked;
 import com.android.instanano.view.home.post.PostAdapter;
-import com.android.instanano.view.profile.ProfileAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -113,10 +111,13 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
     public void onLikedClicked(int position) {
 
         Post post = posts.get(position);
+
         DatabaseReference myRef = database.getReference("Posts")
                 .child(post.getId()).child("numberOfLike");
+
         DatabaseReference likeRef = database.getReference("UserLikes")
                 .child(firebaseUser.getUid()).child(post.getId()).child("didLike");
+
         final int numberOfLike = post.getNumberOfLikes();
         myRef.setValue(numberOfLike);
 
