@@ -11,7 +11,7 @@ public class Post implements Serializable {
     private String date;
     private String userId;
     private User user;
-    private int numberOfLikes;
+    private int numberOfLike;
 
     public String getId() {
         return id;
@@ -61,12 +61,12 @@ public class Post implements Serializable {
         this.user = user;
     }
 
-    public int getNumberOfLikes() {
-        return numberOfLikes;
+    public int getNumberOfLike() {
+        return numberOfLike;
     }
 
-    public void setNumberOfLikes(int numberOfClicked) {
-        this.numberOfLikes = numberOfClicked;
+    public void setNumberOfLike(int numberOfClicked) {
+        this.numberOfLike = numberOfClicked;
     }
 
 

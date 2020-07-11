@@ -19,16 +19,16 @@
         android:id="@+id/profileFragment"
         android:name="com.android.instanano.view.profile.ProfileFragment"
         android:label="item_profile"
-        tools:layout="@layout/item_profile" >
+        tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_editProfile"
             app:destination="@id/editProfile" />
     </fragment>
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.android.instanano.view.profile.EditProfile"
+        android:name="com.android.instanano.view.profile.EditProfileFragment"
         android:label="edit_profile"
-        tools:layout="@layout/edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" />
 
 
 </navigation>

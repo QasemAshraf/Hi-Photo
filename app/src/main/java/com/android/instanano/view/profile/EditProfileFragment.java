@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -33,12 +32,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Objects;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
-public class EditProfile extends Fragment implements View.OnClickListener {
+public class EditProfileFragment extends Fragment implements View.OnClickListener {
 
     private ImageView imgProfile;
     private EditText editName;
@@ -59,14 +57,14 @@ public class EditProfile extends Fragment implements View.OnClickListener {
     private FirebaseAuth mAuth;
 
 
-    public EditProfile() {
+    public EditProfileFragment() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.edit_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         setUpView(view);
         return view;
     }
@@ -83,7 +81,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         imgProfile = view.findViewById(R.id.profile_image);
         editName = view.findViewById(R.id.profileNameEditText);
         editEmail = view.findViewById(R.id.profileEmailEditText);
-        btnEditPhoto = view.findViewById(R.id.profileEitPhotoButton);
+        btnEditPhoto = view.findViewById(R.id.profileEditButton);
         btnSave = view.findViewById(R.id.profileSaveButton);
 
         btnEditPhoto.setOnClickListener(this);
@@ -92,39 +90,42 @@ public class EditProfile extends Fragment implements View.OnClickListener {
     }
 
 
-
     private void savePhoto() {
 
-        String name = editName.toString();
-        String email = editEmail.toString();
+//        String name = editName.getText().toString();
+//        String email = editEmail.getText().toString();
+        try {
+            mStorageRef = FirebaseStorage.getInstance().getReference();
+            mAuth = FirebaseAuth.getInstance();
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
-
-        String imagePath = UUID.randomUUID().toString() + ".jpg";
-        mStorageRef.child("profilePhoto").child(imagePath)
-                .putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+            String imagePath = UUID.randomUUID().toString() + ".jpg";
             mStorageRef.child("profilePhoto").child(imagePath)
-                    .getDownloadUrl().addOnSuccessListener(uri -> {
-                String imageURL = uri.toString();
+                    .putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+                mStorageRef.child("profilePhoto").child(imagePath)
+                        .getDownloadUrl().addOnSuccessListener(uri -> {
+                    User user = new User();
+                    String imageURL = uri.toString();
+                    user.setImageAccount(imageURL);
+//                    user.setNameOfAccount(name);
+//                    user.setEmail(email);
 
-                User user = new User();
-                user.setImageAccount(imageURL);
-                user.setNameOfAccount(user.getNameOfAccount());
-                user.setEmail(user.getEmail());
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                    assert currentUser != null;
+                    user.setId(currentUser.getUid());
+                    savePhotoToDB(currentUser.getUid(), user);
 
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                assert currentUser != null;
-                user.setId(currentUser.getUid());
-                savePhotoToDB(currentUser.getUid(), user);
-
+                });
             });
-        });
+
+        } catch (Exception e) {
+            showMassage("Please Add Photo First Or Click Home To Exit");
+        }
+
     }
 
     private void savePhotoToDB(String id, User user) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Users").child(id).child("ProfilePhotos");
+        DatabaseReference myRef = database.getReference("Users").child(id);
         myRef.setValue(user);
         Toast.makeText(getActivity(), "Photo Added!", Toast.LENGTH_SHORT).show();
         navController.popBackStack();
@@ -191,11 +192,14 @@ public class EditProfile extends Fragment implements View.OnClickListener {
             case R.id.profileSaveButton:
                 savePhoto();
                 break;
-            case R.id.profileEitPhotoButton:
+            case R.id.profileEditButton:
                 checkAccessImagePermission();
                 break;
         }
     }
 
+    private void showMassage(String massage) {
+        Toast.makeText(getContext(), massage, Toast.LENGTH_SHORT).show();
     }
+}
 

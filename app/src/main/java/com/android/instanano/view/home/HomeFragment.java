@@ -39,8 +39,6 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
 
-//    private Post post;
-
 
     public HomeFragment() {
         // Required empty public constructor
@@ -118,7 +116,7 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
         DatabaseReference likeRef = database.getReference("UserLikes")
                 .child(firebaseUser.getUid()).child(post.getId()).child("didLike");
 
-        final int numberOfLike = post.getNumberOfLikes();
+        final int numberOfLike = post.getNumberOfLike();
         myRef.setValue(numberOfLike);
 
         likeRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -128,12 +126,12 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
                 if (didLike != null && didLike){
 
                     myRef.setValue(numberOfLike - 1);
-                    posts.get(position).setNumberOfLikes(numberOfLike - 1);
+                    posts.get(position).setNumberOfLike(numberOfLike - 1);
                     likeRef.setValue(false);
 
                 }else {
                     myRef.setValue(numberOfLike + 1);
-                    posts.get(position).setNumberOfLikes(numberOfLike + 1);
+                    posts.get(position).setNumberOfLike(numberOfLike + 1);
                     likeRef.setValue(true);
 
                 }

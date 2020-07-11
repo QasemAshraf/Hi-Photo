@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.instanano.R;
 import com.android.instanano.models.Post;
+import com.android.instanano.models.User;
 import com.squareup.picasso.Picasso;
 
 public class PostHolder extends RecyclerView.ViewHolder {
@@ -39,7 +40,6 @@ public class PostHolder extends RecyclerView.ViewHolder {
 
     void bindView(Post post){
 
-
         Picasso.get()
                 .load(post.getUser().getImageAccount())
                 .placeholder(R.drawable.img_placeholder)
@@ -54,7 +54,7 @@ public class PostHolder extends RecyclerView.ViewHolder {
         nameOfAccount.setText(post.getUser().getNameOfAccount());
         tvTitle.setText(post.getTitle());
         tvDate.setText(post.getDate());
-        String likes = post.getNumberOfLikes() + "Person";
+        String likes = post.getNumberOfLike() + " person";
         tvNumberOfLike.setText(likes);
     }
 }

@@ -58,7 +58,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddPostFragment extends Fragment implements View.OnClickListener {
 
-    private Button btnNext;
+    private Button btnNext, btnAddImg;
     private ImageView imagePost;
     private EditText edtTitle;
     private Uri imageUri;
@@ -89,7 +89,6 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        checkAccessImagesPermission();
     }
 
     private void setUpView(View view){
@@ -98,6 +97,9 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
         btnNext = view.findViewById(R.id.addPost_button);
         imagePost = view.findViewById(R.id.addPost_imageView);
         edtTitle = view.findViewById(R.id.addPost_title_editText);
+        btnAddImg = view.findViewById(R.id.add_img_btn);
+
+        btnAddImg.setOnClickListener(this);
         btnNext.setOnClickListener(this);
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -107,29 +109,43 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        savePost();
-//        startActivity(new Intent(getActivity(), MainActivity.class));
+
+        switch (v.getId()){
+            case R.id.add_img_btn:
+                checkAccessImagesPermission();
+                break;
+            case R.id.addPost_button:
+                savePost();
+                break;
+        }
     }
 
     private void savePost(){
-        String title = edtTitle.toString();
-        String imgPath = UUID.randomUUID().toString() + ".jpg";
-        mStorageRef.child("postImages").child(imgPath)
-                .putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
-                    mStorageRef.child("postImages").child(imgPath).getDownloadUrl().addOnSuccessListener(uri -> {
-                        String imageURL = uri.toString();
 
-                        Post post = new Post();
-                        post.setImage(imageURL);
-                        post.setTitle(title);
+        try {
+            String title = edtTitle.getText().toString();
+            String imgPath = UUID.randomUUID().toString() + ".jpg";
+            mStorageRef.child("postImages").child(imgPath)
+                    .putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+                mStorageRef.child("postImages").child(imgPath).getDownloadUrl().addOnSuccessListener(uri -> {
+                    String imageURL = uri.toString();
 
-                        FirebaseUser currentUser = mAuth.getCurrentUser();
-                        assert currentUser != null;
-                        post.setUserId(currentUser.getUid());
-                        post.setDate(Utilities.getCurrentDate());
-                        savePostToDB(post);
-                    });
+                    Post post = new Post();
+                    post.setImage(imageURL);
+                    post.setTitle(title);
+
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                    assert currentUser != null;
+                    post.setUserId(currentUser.getUid());
+                    post.setDate(Utilities.getCurrentDate());
+                    savePostToDB(post);
                 });
+            });
+
+        }catch (Exception e){
+            showMassage("Please Add Image First Or Click Home To Exit");
+        }
+
     }
 
 
@@ -143,10 +159,6 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
         navController.popBackStack();
 
     }
-
-
-
-
 
     private void checkAccessImagesPermission(){
         int permission = ContextCompat.checkSelfPermission(requireActivity(),
@@ -226,5 +238,7 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
-
+    private void showMassage(String massage){
+        Toast.makeText(getContext(), massage, Toast.LENGTH_SHORT).show();
+    }
 }

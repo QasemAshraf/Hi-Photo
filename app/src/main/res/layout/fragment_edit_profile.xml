@@ -5,13 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.profile.EditProfile">
+    tools:context=".view.profile.EditProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="match_parent">
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -75,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/profileTitle_textView" />
 
         <Button
-            android:id="@+id/profileEitPhotoButton"
+            android:id="@+id/profileEditButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -83,6 +81,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintEnd_toEndOf="@+id/profile_image"
             app:layout_constraintStart_toStartOf="@+id/profile_image" />
+
         <EditText
             android:id="@+id/profileNameEditText"
             android:layout_width="0dp"
@@ -92,7 +91,7 @@
             android:layout_marginEnd="8dp"
             android:hint="Edit Name"
             android:textColor="#000000"
-            android:textSize="30sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
             app:layout_constraintTop_toBottomOf="@+id/profile_image" />
@@ -105,7 +104,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:hint="Edit Email"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
             app:layout_constraintTop_toBottomOf="@+id/profileNameEditText" />
