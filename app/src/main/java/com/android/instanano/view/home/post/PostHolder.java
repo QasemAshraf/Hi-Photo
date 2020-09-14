@@ -10,17 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.instanano.R;
 import com.android.instanano.models.Post;
 import com.android.instanano.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 public class PostHolder extends RecyclerView.ViewHolder {
 
-    private ImageView imageAccount;
-    private TextView nameOfAccount;
-    private TextView tvTitle;
-    private ImageView imagePost;
     public ImageView imageLike;
-    private TextView tvNumberOfLike;
-    private TextView tvDate;
+    private ImageView imageAccount, imagePost;
+    private TextView nameOfAccount, tvTitle, tvNumberOfLike, tvDate;
 
     public PostHolder(@NonNull View itemView) {
         super(itemView);
@@ -36,21 +34,25 @@ public class PostHolder extends RecyclerView.ViewHolder {
         tvNumberOfLike = itemView.findViewById(R.id.post_numberOfLikes_textView);
         tvTitle = itemView.findViewById(R.id.post_title_textView);
         tvDate = itemView.findViewById(R.id.post_date_textView);
+
     }
 
     void bindView(Post post){
 
-        Picasso.get()
-                .load(post.getUser().getImageAccount())
-                .placeholder(R.drawable.img_placeholder)
-                .error(R.drawable.img_placeholder)
-                .into(imageAccount);
+            Picasso.get()
+                    .load(post.getUser().getImageAccount())
+                    .error(R.drawable.profile_placeholder)
+                    .placeholder(R.drawable.profile_placeholder)
+                    .error(R.drawable.profile_placeholder)
+                    .into(imageAccount);
+
 
         Picasso.get()
                 .load(post.getImage())
                 .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.img_placeholder)
                 .into(imagePost);
+
         nameOfAccount.setText(post.getUser().getNameOfAccount());
         tvTitle.setText(post.getTitle());
         tvDate.setText(post.getDate());

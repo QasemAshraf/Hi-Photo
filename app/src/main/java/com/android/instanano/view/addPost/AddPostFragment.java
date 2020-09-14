@@ -6,20 +6,15 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,29 +22,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.android.instanano.R;
 import com.android.instanano.models.Post;
+import com.android.instanano.models.User;
 import com.android.instanano.utils.Utilities;
-import com.android.instanano.view.main.MainActivity;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.URI;
-import java.sql.Ref;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -63,6 +50,7 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
     private EditText edtTitle;
     private Uri imageUri;
     private Bitmap selectedImage;
+    private ProgressBar addImgProgressBar, addPostProgressBar;
 
     private static final int GALLERY_PERMISSION = 200;
     private static final int GALLERY_PICK = 100;
@@ -71,6 +59,7 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth mAuth;
 
     private NavController navController;
+
 
     public AddPostFragment() {
         // Required empty public constructor
@@ -91,18 +80,20 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
         navController = Navigation.findNavController(view);
     }
 
-    private void setUpView(View view){
-//        imageAccount = view.findViewById(R.id.profile_image);
-//        nameOfAccount = view.findViewById(R.id.profileName_TextView);
+    private void setUpView(View view)
+    {
         btnNext = view.findViewById(R.id.addPost_button);
         imagePost = view.findViewById(R.id.addPost_imageView);
         edtTitle = view.findViewById(R.id.addPost_title_editText);
         btnAddImg = view.findViewById(R.id.add_img_btn);
+        addPostProgressBar = view.findViewById(R.id.addPostProgressBar);
+        addImgProgressBar = view.findViewById(R.id.addImgProgressBar);
 
         btnAddImg.setOnClickListener(this);
         btnNext.setOnClickListener(this);
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -112,7 +103,10 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
 
         switch (v.getId()){
             case R.id.add_img_btn:
+                addImgProgressBar.setVisibility(View.VISIBLE);
+                btnAddImg.setVisibility(View.INVISIBLE);
                 checkAccessImagesPermission();
+
                 break;
             case R.id.addPost_button:
                 savePost();
@@ -123,6 +117,10 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
     private void savePost(){
 
         try {
+
+            addPostProgressBar.setVisibility(View.VISIBLE);
+            btnNext.setVisibility(View.INVISIBLE);
+
             String title = edtTitle.getText().toString();
             String imgPath = UUID.randomUUID().toString() + ".jpg";
             mStorageRef.child("postImages").child(imgPath)
@@ -130,9 +128,9 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
                 mStorageRef.child("postImages").child(imgPath).getDownloadUrl().addOnSuccessListener(uri -> {
                     String imageURL = uri.toString();
 
-                    Post post = new Post();
-                    post.setImage(imageURL);
-                    post.setTitle(title);
+                    Post post = new Post(title, imageURL);
+//                    post.setImage(imageURL);
+//                    post.setTitle(title);
 
                     FirebaseUser currentUser = mAuth.getCurrentUser();
                     assert currentUser != null;
@@ -144,6 +142,9 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
 
         }catch (Exception e){
             showMassage("Please Add Image First Or Click Home To Exit");
+
+            addPostProgressBar.setVisibility(View.INVISIBLE);
+            btnNext.setVisibility(View.VISIBLE);
         }
 
     }
@@ -164,7 +165,7 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
         int permission = ContextCompat.checkSelfPermission(requireActivity(),
                 Manifest.permission.READ_EXTERNAL_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(getActivity(),
+            ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, GALLERY_PERMISSION);
         }else {
             getImageFromGallery();
@@ -203,14 +204,25 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
                 // String imageBase64 = getResizedBase64(selectedImage, 100, 100);
 
                 imagePost.setImageBitmap(selectedImage);
+                btnAddImg.setText("Change Image");
+                btnAddImg.setVisibility(View.VISIBLE);
+                addImgProgressBar.setVisibility(View.INVISIBLE);
 
             }catch (FileNotFoundException e){
                 e.printStackTrace();
                 Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                btnAddImg.setVisibility(View.VISIBLE);
+                btnAddImg.setText("Click Her To Add Your Image");
+                addImgProgressBar.setVisibility(View.INVISIBLE);
             }
 
         }else {
             Toast.makeText(getActivity(), "You haven't Picked Image", Toast.LENGTH_SHORT).show();
+
+            btnAddImg.setVisibility(View.VISIBLE);
+            btnAddImg.setText("Click Her To Add Your Image");
+            addImgProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 

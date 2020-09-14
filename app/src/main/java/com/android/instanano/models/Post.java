@@ -13,6 +13,14 @@ public class Post implements Serializable {
     private User user;
     private int numberOfLike;
 
+    public Post() {
+    }
+
+    public Post(String title, String image) {
+        this.title = title;
+        this.image = image;
+    }
+
     public String getId() {
         return id;
     }

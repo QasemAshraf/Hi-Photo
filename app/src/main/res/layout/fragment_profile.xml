@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.profile.ProfileFragment">
+    tools:context=".view.profile.ProfileFragment"
+    android:background="@color/wight">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.10" />
+            app:layout_constraintGuide_percent="0.2" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -24,62 +25,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.90" />
+            app:layout_constraintGuide_percent="0.8" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.33" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.66" />
-
-
-        <TextView
-            android:id="@+id/fragment_profileTitle_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/instanano"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_profile_logOutButton"
-            app:layout_constraintStart_toEndOf="@+id/fragment_profile_editButton"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fragment_profile_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/img_placeholder"
+            android:src="@drawable/profile_placeholder"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="3dp"
             app:layout_constraintEnd_toEndOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_profileTitle_textView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/fragment_profileName_TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text=""
+            android:layout_marginTop="8dp"
             android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
             app:layout_constraintTop_toBottomOf="@+id/fragment_profile_image" />
@@ -88,11 +58,9 @@
             android:id="@+id/fragment_profileEmail_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text=""
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
@@ -102,33 +70,62 @@
         <Button
             android:id="@+id/fragment_profile_logOutButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            android:text="LogOut"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/gradient_btn"
+            android:padding="4dp"
+            android:text="Log Out"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/logOutButtonProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_logOutButton"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_profile_logOutButton"
+            app:layout_constraintStart_toStartOf="@+id/fragment_profile_logOutButton"
+            app:layout_constraintTop_toTopOf="@+id/fragment_profile_logOutButton" />
 
         <Button
             android:id="@+id/fragment_profile_editButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:text="@string/edit_profile"
+            android:layout_height="35dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/gradient_btn"
+            android:padding="4dp"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/ProfileEditProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_editButton"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_profile_editButton"
+            app:layout_constraintStart_toStartOf="@+id/fragment_profile_editButton"
+            app:layout_constraintTop_toTopOf="@+id/fragment_profile_editButton" />
+
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profile_recyclerView"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_profileEmail_textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

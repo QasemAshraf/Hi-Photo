@@ -1,56 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.addPost.AddPostFragment">
+    android:background="@color/wight">
 
-    <Button
-        android:id="@+id/addPost_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/addPost_imageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/img_placeholder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPost_button" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/addPost_title_editText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Write anything..."
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPost_imageView" />
+        <Button
+            android:id="@+id/addPost_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/gradient_btn"
+            android:padding="4dp"
+            android:text="Post"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/add_img_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click Her To Add Image"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/addPost_imageView"
-        app:layout_constraintEnd_toEndOf="@+id/addPost_imageView"
-        app:layout_constraintStart_toStartOf="@+id/addPost_imageView"
-        app:layout_constraintTop_toTopOf="@+id/addPost_imageView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/addPostProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/addPost_button"
+            app:layout_constraintEnd_toEndOf="@+id/addPost_button"
+            app:layout_constraintStart_toStartOf="@+id/addPost_button"
+            app:layout_constraintTop_toTopOf="@+id/addPost_button" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/img_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addPost_button">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/addPost_imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_placeholder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/addPost_title_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="Write anything..."
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/addPost_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/add_img_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_txt"
+            android:padding="8dp"
+            android:text="Click Her To Add Your Image"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_container"
+            app:layout_constraintEnd_toEndOf="@+id/img_container"
+            app:layout_constraintStart_toStartOf="@+id/img_container"
+            app:layout_constraintTop_toTopOf="@+id/img_container" />
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/addImgProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/add_img_btn"
+            app:layout_constraintEnd_toEndOf="@+id/add_img_btn"
+            app:layout_constraintStart_toStartOf="@+id/add_img_btn"
+            app:layout_constraintTop_toTopOf="@+id/add_img_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

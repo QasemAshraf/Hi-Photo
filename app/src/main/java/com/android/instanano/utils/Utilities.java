@@ -1,10 +1,6 @@
 package com.android.instanano.utils;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,11 +14,4 @@ public class Utilities {
         return simpleDateFormat.format(date);
     }
 
-    public static void getEditPhoto(){
-
-    }
-
-    public static void checkAccessImagePermission(){
-
-    }
 }

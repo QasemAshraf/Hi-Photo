@@ -3,14 +3,11 @@ package com.android.instanano.view.home.post;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.instanano.R;
 import com.android.instanano.models.Post;
 import com.android.instanano.utils.OnLikedClicked;
-
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostHolder> {

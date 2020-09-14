@@ -10,15 +10,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.instanano.R;
 import com.android.instanano.models.Post;
 import com.android.instanano.models.User;
@@ -34,8 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener, OnLikedClicked {
@@ -45,12 +44,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
     private ArrayList<Post> posts;
 
     private ImageView imageAccount;
-    private TextView nameOfAccount;
-    private TextView tvEmail;
+    private TextView nameOfAccount, tvEmail;
 
 
-    private Button btnLogOut;
-    private Button btnEdit;
+    private Button btnLogOut, btnEdit;
+    private ProgressBar logOutProgressBar, editProfileProgressBar;
     private String userId;
 
     private NavController navController;
@@ -80,7 +78,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
         navController = Navigation.findNavController(view);
     }
 
-    private void setUpView(View view) {
+    private void setUpView(View view)
+    {
 
         recyclerView = view.findViewById(R.id.profile_recyclerView);
 
@@ -89,6 +88,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
         tvEmail = view.findViewById(R.id.fragment_profileEmail_textView);
         btnLogOut = view.findViewById(R.id.fragment_profile_logOutButton);
         btnEdit = view.findViewById(R.id.fragment_profile_editButton);
+        editProfileProgressBar = view.findViewById(R.id.ProfileEditProgressBar);
+        logOutProgressBar = view.findViewById(R.id.logOutButtonProgressBar);
+
 
         btnEdit.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
@@ -107,16 +109,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
         myRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                assert user != null;
-                nameOfAccount.setText(user.getNameOfAccount());
-                tvEmail.setText(user.getEmail());
-                userId = user.getId();
-                Picasso.get()
-                        .load(user.getImageAccount())
-                        .placeholder(R.drawable.img_placeholder)
-                        .into(imageAccount);
-            }
+                    User user = snapshot.getValue(User.class);
+
+                    nameOfAccount.setText(user.getNameOfAccount());
+                    tvEmail.setText(user.getEmail());
+                    userId = user.getId();
+
+                    Picasso.get()
+                            .load(user.getImageAccount())
+                            .error(R.drawable.profile_placeholder)
+                            .placeholder(R.drawable.profile_placeholder)
+                            .into(imageAccount);
+
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -129,11 +134,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_profile_logOutButton:
+                logOutProgressBar.setVisibility(View.VISIBLE);
+                btnLogOut.setVisibility(View.INVISIBLE);
                 mAuth.signOut();
-                requireActivity()
-                        .startActivity(new Intent(getActivity(), SplashActivity.class));
+                startActivity(new Intent(getActivity(), SplashActivity.class));
+                requireActivity().finish();
                 break;
             case R.id.fragment_profile_editButton:
+                editProfileProgressBar.setVisibility(View.VISIBLE);
+                btnEdit.setVisibility(View.INVISIBLE);
                 navController.navigate(R.id.action_profileFragment_to_editProfile);
                 break;
         }
