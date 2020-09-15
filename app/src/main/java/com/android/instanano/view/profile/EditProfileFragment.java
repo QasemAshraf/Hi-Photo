@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -141,6 +142,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                             {
                                 Picasso.get()
                                         .load(firebaseUser.getPhotoUrl())
+                                        .networkPolicy(NetworkPolicy.OFFLINE)
                                         .error(R.drawable.profile_placeholder)
                                         .placeholder(R.drawable.profile_placeholder)
                                         .into(imgProfile);

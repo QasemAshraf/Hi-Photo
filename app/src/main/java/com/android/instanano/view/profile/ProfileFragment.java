@@ -105,6 +105,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
 
         database = FirebaseDatabase.getInstance();
         myRefUser = database.getReference("Users").child(firebaseUser.getUid());
+        myRefUser.keepSynced(true);
 
         myRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -164,6 +165,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
                     post.setId(id);
 
                     DatabaseReference usersRef = database.getReference("Users").child(post.getUserId());
+                    usersRef.keepSynced(true);
 
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override

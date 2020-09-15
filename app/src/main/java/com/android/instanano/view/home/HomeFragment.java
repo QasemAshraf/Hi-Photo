@@ -56,11 +56,11 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
         posts = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Posts");
+        myRef.keepSynced(true);
 
         postAdapter = new PostAdapter(posts, HomeFragment.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(postAdapter);
-
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
                     post.setId(id);
 
                     DatabaseReference usersRef = database.getReference("Users").child(post.getUserId());
+                    usersRef.keepSynced(true);
 
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override

@@ -12,6 +12,7 @@ import com.android.instanano.models.Post;
 import com.android.instanano.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class PostHolder extends RecyclerView.ViewHolder {
@@ -41,7 +42,7 @@ public class PostHolder extends RecyclerView.ViewHolder {
 
             Picasso.get()
                     .load(post.getUser().getImageAccount())
-                    .error(R.drawable.profile_placeholder)
+                    .networkPolicy(NetworkPolicy.OFFLINE)
                     .placeholder(R.drawable.profile_placeholder)
                     .error(R.drawable.profile_placeholder)
                     .into(imageAccount);
@@ -49,6 +50,7 @@ public class PostHolder extends RecyclerView.ViewHolder {
 
         Picasso.get()
                 .load(post.getImage())
+                .networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.img_placeholder)
                 .into(imagePost);
