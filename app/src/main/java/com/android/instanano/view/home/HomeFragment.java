@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
         myRef = database.getReference("Posts");
         myRef.keepSynced(true);
 
+
         postAdapter = new PostAdapter(posts, HomeFragment.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(postAdapter);
@@ -75,8 +76,9 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
                     final Post post = snapshot.getValue(Post.class);
                     post.setId(id);
 
+
                     DatabaseReference usersRef = database.getReference("Users").child(post.getUserId());
-                    usersRef.keepSynced(true);
+
 
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -84,6 +86,7 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
                                 User user = dataSnapshot.getValue(User.class);
                                 post.setUser(user);
                                 posts.add(post);
+                                usersRef.keepSynced(true);
                                 postAdapter.notifyDataSetChanged();
                             }
 

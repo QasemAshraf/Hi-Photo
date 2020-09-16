@@ -12,6 +12,7 @@ import com.android.instanano.models.Post;
 import com.android.instanano.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +46,23 @@ public class PostHolder extends RecyclerView.ViewHolder {
                     .networkPolicy(NetworkPolicy.OFFLINE)
                     .placeholder(R.drawable.profile_placeholder)
                     .error(R.drawable.profile_placeholder)
-                    .into(imageAccount);
+                    .into(imageAccount, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                            Picasso.get()
+                                    .load(post.getUser().getImageAccount())
+                                    .placeholder(R.drawable.profile_placeholder)
+                                    .error(R.drawable.profile_placeholder)
+                                    .into(imageAccount);
+
+                        }
+                    });
 
 
         Picasso.get()
@@ -53,7 +70,23 @@ public class PostHolder extends RecyclerView.ViewHolder {
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.img_placeholder)
-                .into(imagePost);
+                .into(imagePost, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                        Picasso.get()
+                                .load(post.getImage())
+                                .placeholder(R.drawable.img_placeholder)
+                                .error(R.drawable.img_placeholder)
+                                .into(imagePost);
+
+                    }
+                });
 
         nameOfAccount.setText(post.getUser().getNameOfAccount());
         tvTitle.setText(post.getTitle());

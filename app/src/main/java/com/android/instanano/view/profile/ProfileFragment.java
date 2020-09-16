@@ -32,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -107,9 +109,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
         myRefUser = database.getReference("Users").child(firebaseUser.getUid());
         myRefUser.keepSynced(true);
 
+
         myRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                     User user = snapshot.getValue(User.class);
 
                     nameOfAccount.setText(user.getNameOfAccount());
@@ -120,7 +124,25 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
                             .load(user.getImageAccount())
                             .error(R.drawable.profile_placeholder)
                             .placeholder(R.drawable.profile_placeholder)
-                            .into(imageAccount);
+                            .into(imageAccount, new Callback() {
+                                @Override
+                                public void onSuccess() {
+
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+
+                                    Picasso.get()
+                                            .load(user.getImageAccount())
+                                            .networkPolicy(NetworkPolicy.OFFLINE)
+                                            .error(R.drawable.profile_placeholder)
+                                            .placeholder(R.drawable.profile_placeholder)
+                                            .into(imageAccount);
+
+                                }
+                            });
+
 
                 }
 
@@ -165,7 +187,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
                     post.setId(id);
 
                     DatabaseReference usersRef = database.getReference("Users").child(post.getUserId());
-                    usersRef.keepSynced(true);
 
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -173,6 +194,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
                             User user = dataSnapshot.getValue(User.class);
                             post.setUser(user);
                             posts.add(post);
+                            usersRef.keepSynced(true);
                             postAdapter.notifyDataSetChanged();
                         }
 
