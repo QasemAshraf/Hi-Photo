@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.android.instanano.view.home.HomeFragment"
+        android:name="com.android.hiphoto.view.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/addPostFragment"
-        android:name="com.android.instanano.view.addPost.AddPostFragment"
+        android:name="com.android.hiphoto.view.addPost.AddPostFragment"
         android:label="fragment_add_post"
         tools:layout="@layout/fragment_add_post" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.android.instanano.view.profile.ProfileFragment"
+        android:name="com.android.hiphoto.view.profile.ProfileFragment"
         android:label="item_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.android.instanano.view.profile.EditProfileFragment"
+        android:name="com.android.hiphoto.view.profile.EditProfileFragment"
         android:label="edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
 

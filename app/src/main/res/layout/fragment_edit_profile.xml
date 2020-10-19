@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.profile.EditProfileFragment"
+    tools:context="com.android.hiphoto.view.profile.EditProfileFragment"
     android:background="@color/wight">
 
     <androidx.constraintlayout.widget.ConstraintLayout
