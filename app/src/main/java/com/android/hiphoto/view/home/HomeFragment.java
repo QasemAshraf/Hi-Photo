@@ -106,8 +106,6 @@ public class HomeFragment extends Fragment implements OnLikedClicked {
         });
     }
 
-
-
     @Override
     public void onLikedClicked(int position) {
 

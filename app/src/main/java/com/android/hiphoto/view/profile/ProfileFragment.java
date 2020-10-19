@@ -48,7 +48,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
     private ImageView imageAccount;
     private TextView nameOfAccount, tvEmail;
 
-
     private Button btnLogOut, btnEdit;
     private ProgressBar logOutProgressBar, editProfileProgressBar;
     private String userId;
@@ -59,7 +58,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
 
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
-
 
     public ProfileFragment() {
     }
@@ -82,7 +80,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
 
     private void setUpView(View view)
     {
-
         recyclerView = view.findViewById(R.id.profile_recyclerView);
 
         imageAccount = view.findViewById(R.id.fragment_profile_image);
@@ -92,7 +89,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
         btnEdit = view.findViewById(R.id.fragment_profile_editButton);
         editProfileProgressBar = view.findViewById(R.id.ProfileEditProgressBar);
         logOutProgressBar = view.findViewById(R.id.logOutButtonProgressBar);
-
 
         btnEdit.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
@@ -108,7 +104,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, O
         database = FirebaseDatabase.getInstance();
         myRefUser = database.getReference("Users").child(firebaseUser.getUid());
         myRefUser.keepSynced(true);
-
 
         myRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

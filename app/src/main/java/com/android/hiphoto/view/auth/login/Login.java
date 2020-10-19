@@ -78,12 +78,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     edtEmail.setError("Input Email");
                     loginProgressBar.setVisibility(View.INVISIBLE);
                     btnLogin.setVisibility(View.VISIBLE);
+                    btnSignInSignOut.setVisibility(View.VISIBLE);
                 }
                 else if (password.isEmpty())
                 {
                     edtPassword.setError("Input Password");
                     loginProgressBar.setVisibility(View.INVISIBLE);
                     btnLogin.setVisibility(View.VISIBLE);
+                    btnSignInSignOut.setVisibility(View.VISIBLE);
                 }
                 else
                 {
@@ -110,6 +112,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                      {
                         loginProgressBar.setVisibility(View.INVISIBLE);
                         btnLogin.setVisibility(View.VISIBLE);
+                         btnSignInSignOut.setVisibility(View.VISIBLE);
                         showMessage(Objects.requireNonNull(task.getException()).getMessage());
                     }
                 });

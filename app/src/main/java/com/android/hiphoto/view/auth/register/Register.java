@@ -30,7 +30,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +40,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     private void setUpView()
     {
-
         nameOfAccount = findViewById(R.id.profileName_TextView);
         edtEmail = findViewById(R.id.register_yourEmail_editText);
         edtPassword = findViewById(R.id.register_yourPassword_editText);
@@ -78,7 +76,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     public boolean validateEmail()
     {
-
         String email = edtEmail.getText().toString();
         String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -118,11 +115,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         if (!validateName() | !validateEmail() | !validatePassword())
         {
             btnRegister.setVisibility(View.VISIBLE);
+            btnLogin.setVisibility(View.VISIBLE);
             regProgressBar.setVisibility(View.INVISIBLE);
         }
         else
          {
            btnRegister.setVisibility(View.INVISIBLE);
+           btnLogin.setVisibility(View.INVISIBLE);
            regProgressBar.setVisibility(View.VISIBLE);
 
             //TODO:Validation
@@ -138,7 +137,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId())
         {
             case R.id.register_button:
-                btnLogin.setVisibility(View.INVISIBLE);
                 validateData();
             break;
 
@@ -163,15 +161,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                                 .build();
 
                         firebaseUser.updateProfile(profileUpdates);
-
                         saveUserToDB(firebaseUser.getUid(), user);
                         user.setId(firebaseUser.getUid());
                         updateUI();
 
-
                     } else {
                         showMessage("Authentication failed.");
                         btnRegister.setVisibility(View.VISIBLE);
+                        btnLogin.setVisibility(View.VISIBLE);
                         regProgressBar.setVisibility(View.INVISIBLE);
                     }
                 });

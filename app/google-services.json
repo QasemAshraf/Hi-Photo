@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "897966928352",
+    "firebase_url": "https://instanano-59c90.firebaseio.com",
+    "project_id": "instanano-59c90",
+    "storage_bucket": "instanano-59c90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897966928352:android:911e4056a862a2176afb85",
+        "android_client_info": {
+          "package_name": "com.android.hiphoto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897966928352-utvc6d7g6ld10g68ids4qbbra0a7d5j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC8BB66w5U3q_Gan17R7kgCPSBMOxnWbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897966928352-utvc6d7g6ld10g68ids4qbbra0a7d5j3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

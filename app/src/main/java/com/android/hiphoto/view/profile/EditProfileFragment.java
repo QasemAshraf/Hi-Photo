@@ -168,7 +168,6 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
     }
 
-
     private void checkAccessImagePermission() {
         int permission = ContextCompat.checkSelfPermission(requireActivity(),
                 Manifest.permission.READ_EXTERNAL_STORAGE);
